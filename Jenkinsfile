@@ -14,8 +14,19 @@ pipeline {
     }
 
     stage('Build') {
-      steps {
-        sh 'docker build -f sillydocker/Dokerfile .'
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'docker build -f sillydocker/Dokerfile .'
+          }
+        }
+
+        stage('Whoami') {
+          steps {
+            sh 'whoami'
+          }
+        }
+
       }
     }
 
