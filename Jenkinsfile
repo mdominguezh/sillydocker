@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sh 'docker build -f sillydocker/Dokerfile .'
+            sh 'docker build -f Dokerfile .'
           }
         }
 
