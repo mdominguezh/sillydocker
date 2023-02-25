@@ -16,6 +16,10 @@ pipeline {
     stage('Build') {
       parallel {
         stage('Build') {
+          agent any
+          environment {
+            jenkins = 'agent'
+          }
           steps {
             sh 'docker build -f Dockerfile .'
           }
