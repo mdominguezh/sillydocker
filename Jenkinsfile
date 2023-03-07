@@ -19,7 +19,7 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        sh 'docker build -f Dockerfile -t manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER} .'
+        sh "docker build -f Dockerfile -t manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER} ."
       }
     }
 
@@ -31,7 +31,7 @@ pipeline {
 
     stage('Push') {
       steps {
-        sh 'docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}'
+        sh "docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}"
       }
     }
 
