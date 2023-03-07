@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred-mdom')
+  }
   stages {
     stage('Ckeckout Code') {
       steps {
@@ -16,7 +19,7 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        sh 'docker build -f Dockerfile .'
+        sh 'docker build -f Dockerfile -t manueldominguezherrera464/sillydocker:latest .'
       }
     }
 
