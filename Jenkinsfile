@@ -14,20 +14,21 @@ pipeline {
     }
 
     stage('Build') {
-      parallel {
-        stage('Build') {
-          agent any
-          steps {
-            sh 'docker build -f Dockerfile .'
-          }
-        }
+      agent any
+      steps {
+        sh 'docker build -f Dockerfile .'
+      }
+    }
 
-        stage('Whoami') {
-          steps {
-            sh 'whoami'
-          }
-        }
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PWD | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
 
+    stage('Push') {
+      steps {
+        sh 'docker push manueldominguezherrera464/sillydocker:latest'
       }
     }
 
