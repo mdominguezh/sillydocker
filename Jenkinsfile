@@ -1,8 +1,3 @@
-def remote = [:]
-remote.name = "testserver"
-remote.host = "192.168.168.59"
-remote.allowAnyHosts = true
-
 pipeline {
   agent any
   environment {
@@ -41,17 +36,11 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'Deploying....'
-        withCredentials([usernamePassword(credentialsId: 'deployserver', passwordVariable: 'password', usernameVariable: 'userName')]) {
-        remote.user = userName
-        remote.password = password
-
-        writeFile file: 'test.sh', text: 'ls'
-        sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
-        sshScript remote: remote, script: 'test.sh'
-        sshPut remote: remote, from: 'test.sh', into: '.'
-        sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
-        sshRemove remote: remote, path: 'test.sh'
+        sshagent(credentials : ['deployserver']) {
+            sh 'ssh -o StrictHostKeyChecking=no roche@192.168.168.59 uptime'
+            sh 'ssh -v roche@192.168.168.59'
+            sh "ssh roche@192.168.168.59 /opt/roche/home/deployimage.sh sillydocher 1.${BUILD_NUMBER}"
+        }
       }
     }
   }
