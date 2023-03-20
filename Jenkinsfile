@@ -36,11 +36,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sshagent(credentials : ['deployserver']) {
-            sh 'ssh -o StrictHostKeyChecking=no roche@192.168.168.59 uptime'
-            sh 'ssh -v roche@192.168.168.59'
-            sh "ssh roche@192.168.168.59 /opt/roche/home/deployimage.sh sillydocher 1.${BUILD_NUMBER}"
-        }
+        sh 'wget -P ~/ https://github.com/clarkwang/passh/master.zip && cc -o passh passh.c && cp -v passh /usr/bin/ && passh -h '     
       }
     }
   }
