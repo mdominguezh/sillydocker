@@ -53,7 +53,7 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
         sh 'ls -lhA '
       }
     }
-
+/*
     stage('Build') {
       agent any
       steps {
@@ -72,6 +72,7 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
         sh "docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}"
       }
     }
+    */
     stage('Deploy') {
       
       steps {
@@ -80,9 +81,10 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
       }
     }
   }
+  /*
   post {
     always{
       sh 'docker logout'
     }
-  }
+  }*/
 }
