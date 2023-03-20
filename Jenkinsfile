@@ -75,7 +75,7 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
       
       steps {
         sshagent(['deployserver2']) {
-          sh "ssh -o StrictHostKeyChecking=no -l roche 192.168.168.60 /opt/roche/home/deployimage.sh sillydocher 1.${BUILD_NUMBER}"
+          sh "ssh -o StrictHostKeyChecking=no -l roche 192.168.168.60 echo "roche" | sudo -S /opt/roche/home/deployimage.sh sillydocher 1.${BUILD_NUMBER}"
         }
       }
     }
