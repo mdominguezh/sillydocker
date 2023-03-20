@@ -77,7 +77,7 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
       
       steps {
         sshagent(['deployserver2']) {
-          sh 'ip -4 addr'
+          sh 'ssh -o StrictHostKeyChecking=no -l roche 192.168.168.60 ip -4 addr'
         }
       }
     }
