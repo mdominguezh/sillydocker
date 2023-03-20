@@ -42,7 +42,6 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
 -----END OPENSSH PRIVATE KEY-----"""
   }
   stages {
-/*
     stage('Ckeckout Code') {
       steps {
         git(url: 'https://github.com/mdominguezh/sillydocker.git', branch: 'main')
@@ -72,20 +71,18 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
         sh "docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}"
       }
     }
-    */
     stage('Deploy') {
       
       steps {
         sshagent(['deployserver2']) {
-          sh 'ssh -o StrictHostKeyChecking=no -l roche 192.168.168.60 ip -4 addr'
+          sh "ssh -o StrictHostKeyChecking=no -l roche 192.168.168.60 /opt/roche/home/deployimage.sh sillydocher 1.${BUILD_NUMBER}"
         }
       }
     }
   }
-  /*
   post {
     always{
       sh 'docker logout'
     }
-  }*/
+  }
 }
