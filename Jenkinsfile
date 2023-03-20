@@ -76,10 +76,12 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
     stage('Deploy') {
       
       steps {
-        sh 'eval $(ssh-agent)'
-        /*sh "ssh-add <(echo \"$SSH_PRIVATE_KEY\")"*/
-        sh "echo '${SSH_PRIVATE_KEY}'| ssh-add - "
-        sh "ssh -o StrictHostKeyChecking=no roche@192.168.168.59 uptime"
+        /*sh 'eval $(ssh-agent)'
+        sh "ssh-add <(echo \"$SSH_PRIVATE_KEY\")"*/
+        def command = $/"echo '${SSH_PRIVATE_KEY}'| ssh-add - "/$
+        res = sh(returnStdout: true, script: command).trim()
+        sh("echo ${res}")
+        sh "ssh -o StrictHostKeyChecking=no roche@192.168.168.60 uptime"
       }
     }
   }
