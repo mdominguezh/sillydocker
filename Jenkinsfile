@@ -36,6 +36,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
+        sh 'whoami && sudo whoami'
         sh 'apt update -y && apt install wget -y && wget -P ~/ https://github.com/clarkwang/passh/master.zip && cc -o passh passh.c && cp -v passh /usr/bin/ && passh -h '     
       }
     }
