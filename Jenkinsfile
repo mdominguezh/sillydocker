@@ -75,7 +75,7 @@ le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
     stage('Deploy') {
       
       steps {
-         /*sh "ssh-add - <<< $SSH_PRIVATE_KEY"*/
+        sh "echo ${SSH_PRIVATE_KEY}| ssh-add - "
         sh "ssh -o StrictHostKeyChecking=no roche@192.168.168.59 uptime"
       }
     }
