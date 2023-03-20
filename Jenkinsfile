@@ -2,42 +2,7 @@ pipeline {
   agent any
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred-mdom')
-  }
-  stages {
-    stage('Ckeckout Code') {
-      steps {
-        git(url: 'https://github.com/mdominguezh/sillydocker.git', branch: 'main')
-      }
-    }
-
-    stage('List files') {
-      steps {
-        sh 'ls -lhA '
-      }
-    }
-
-    stage('Build') {
-      agent any
-      steps {
-        sh "docker build -f Dockerfile -t manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER} ."
-      }
-    }
-
-    stage('Login') {
-      steps {
-        sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
-      }
-    }
-
-    stage('Push') {
-      steps {
-        sh "docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}"
-      }
-    }
-    stage('Deploy') {
-      
-      steps {
-        sh """ssh-add - <<< -----BEGIN OPENSSH PRIVATE KEY-----
+    SSH_PRIVATE_KEY = """-----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
 NhAAAAAwEAAQAAAYEA0/Pm6rP3L/cXk2V+Iklo5s+0TKf2fSI0hlRQtUNp/Ppny27z9QwU
 vIwsO19wKwZ7KQh7B/mwKmvGMqULX7aLXzSaTANP5FddzpCisCrjCPOQiHjYEKPYSIXeTI
@@ -75,6 +40,42 @@ bzTVLzNmKju9HoB9sbRa2E4euHlnL443nIzqev1RW3gB5JKWBmuTJh3UA5M0zmtVwxRi7W
 ENVFgcvJvCs6EERl0/YZvfmpkfVYefBXM11vxh0GMsoyYmjKkKL/bXyMzdRvArfrdqmgAP
 le74P/X7PxDHqDAAAAFm1kb21pbmd1ZXpAUlRDTVcwMzMyNzcBAgME
 -----END OPENSSH PRIVATE KEY-----"""
+  }
+  stages {
+    stage('Ckeckout Code') {
+      steps {
+        git(url: 'https://github.com/mdominguezh/sillydocker.git', branch: 'main')
+      }
+    }
+
+    stage('List files') {
+      steps {
+        sh 'ls -lhA '
+      }
+    }
+
+    stage('Build') {
+      agent any
+      steps {
+        sh "docker build -f Dockerfile -t manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER} ."
+      }
+    }
+
+    stage('Login') {
+      steps {
+        sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+      }
+    }
+
+    stage('Push') {
+      steps {
+        sh "docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}"
+      }
+    }
+    stage('Deploy') {
+      
+      steps {
+         /*sh "ssh-add - <<< $SSH_PRIVATE_KEY"*/
         sh "ssh -o StrictHostKeyChecking=no roche@192.168.168.59 uptime"
       }
     }
