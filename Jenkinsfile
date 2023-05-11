@@ -44,7 +44,7 @@ pipeline {
     }*/
      stage('ZIP') {
       steps {
-        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "(**/TEST-*xml,./pm-instrument-throughput-module-acceptance-test/src/test/resources/features/*)"
+        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "**/TEST-*xml"
         archiveArtifacts artifacts: 'Test.zip', fingerprint: true
       }
     }
