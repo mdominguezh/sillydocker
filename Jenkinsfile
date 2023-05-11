@@ -14,7 +14,7 @@ pipeline {
         sh 'ls -lhA '
       }
     }
-
+/*
     stage('Build') {
       agent any
       steps {
@@ -33,7 +33,6 @@ pipeline {
         sh "docker push manueldominguezherrera464/sillydocker:1.${BUILD_NUMBER}"
       }
     }
-    /*
     stage('Deploy') {
       
       steps {
@@ -44,14 +43,14 @@ pipeline {
     }*/
      stage('ZIP') {
       steps {
-        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "[**/TEST-*xml|*-acceptance-test/src/test/resources/features/*]"
+        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "*-acceptance-test/src/test/resources/features/*"
         archiveArtifacts artifacts: 'Test.zip', fingerprint: true
       }
     }
-  }
+  }/*
   post {
     always{
       sh 'docker logout'
     }
-  }
+  }*/
 }
