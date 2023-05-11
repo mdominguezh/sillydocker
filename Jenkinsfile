@@ -41,12 +41,6 @@ pipeline {
         }
       }
     }   */
-     stage('ZIP') {
-      steps {
-        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "**/TEST-*xml*"
-        archiveArtifacts artifacts: 'test.zip', fingerprint: true
-      }
-    }
   }
   post {
     always{
