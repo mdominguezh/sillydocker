@@ -40,13 +40,13 @@ pipeline {
           sh """ssh -o StrictHostKeyChecking=no -l roche 192.168.168.60 'echo \"roche\" | /usr/bin/sudo -S /opt/roche/home/deployimage.sh sillydocker 1.${BUILD_NUMBER}'"""
         }
       }
-    }*/
+    }
      stage('ZIP') {
       steps {
         zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "**/TEST-*xml*"
         archiveArtifacts artifacts: 'test.zip', fingerprint: true
       }
-    }   
+    }   */
   }
   post {
     always{
