@@ -12,6 +12,8 @@ pipeline {
     stage('List files') {
       steps {
         sh 'ls -lhA '
+        sh 'ls ${WORKSPACE}; echo ${WORKSPACE}'
+        sh 'ls ${JENKINS_HOME}; echo ${JENKINS_HOME}'
       }
     }
 /*
