@@ -46,7 +46,7 @@ pipeline {
      stage('ZIP') {
       steps {
         sh 'pwd'
-        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "*-acceptance-test/src/test/resources/features*,**/TEST-*xml"
+        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "*-acceptance-test/src/test/resources/features/**/*,**/TEST-*xml"
         archiveArtifacts artifacts: 'Test.zip', fingerprint: true
       }
     }
