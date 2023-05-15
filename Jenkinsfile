@@ -45,7 +45,7 @@ pipeline {
     }*/
      stage('ZIP') {
       steps {
-        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "*-acceptance-test/src/test/resources/features/*,**/TEST-*xml"
+        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "${WORKSPACE}/*-acceptance-test/src/test/resources/features/*,**/TEST-*xml"
         archiveArtifacts artifacts: 'Test.zip', fingerprint: true
       }
     }
