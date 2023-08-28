@@ -1,8 +1,8 @@
 pipeline {
   agent any
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred-mdom')
-  }
+  // environment {
+  //   DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred-mdom')
+  // }
   stages {
     stage('Ckeckout Code') {
       steps {
