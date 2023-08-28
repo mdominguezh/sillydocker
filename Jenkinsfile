@@ -55,7 +55,7 @@ pipeline {
       steps {
         sh "sed '#</servers>#,$d' settings.xml > temp"
         sh "cat servers.xml >> temp"
-        sh "sed '#</servers>#,$!d' settings.xml >> temp"
+        sh "sed '#</servers>#,\$!d' settings.xml >> temp"
         sh "cat temp"
       }
     }
