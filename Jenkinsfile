@@ -43,14 +43,23 @@ pipeline {
         }
       }
     }*/
-     stage('ZIP') {
+  //    stage('ZIP') {
+  //     steps {
+  //       sh 'pwd'
+  //       zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "*-acceptance-test/src/test/resources/features/**/*,**/TEST-*xml"
+  //       archiveArtifacts artifacts: 'Test.zip', fingerprint: true
+  //     }
+  //   }
+  // }
+      stage('Parsefile') {
       steps {
-        sh 'pwd'
-        zip zipFile: 'Test.zip', archive: false, dir: '.', glob: "*-acceptance-test/src/test/resources/features/**/*,**/TEST-*xml"
-        archiveArtifacts artifacts: 'Test.zip', fingerprint: true
+        sh "sed '#</servers>#,$d' settings.xml > temp"
+        sh "cat servers.xml >> temp"
+        sh "sed '#</servers>#,$!d' settings.xml >> temp"
+        sh "cat temp"
       }
     }
-  }/*
+  /*
   post {
     always{
       sh 'docker logout'
