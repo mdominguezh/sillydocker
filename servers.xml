@@ -1,0 +1,10 @@
+        <server>
+            <id>prueba-repository</id>
+            <username>prueba-user</username>
+            <password>prueba-password</password>
+	    <privateKey>/home/prueba/.ssh/bael_key</privateKey>
+            <passphrase>prueba-passphrase</passphrase>
+            <filePermissions>664</filePermissions>
+            <directoryPermissions>775</directoryPermissions>
+            <configuration></configuration>
+        </server>
