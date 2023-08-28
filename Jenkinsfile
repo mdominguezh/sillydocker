@@ -50,7 +50,7 @@ pipeline {
   //       archiveArtifacts artifacts: 'Test.zip', fingerprint: true
   //     }
   //   }
-  // }
+
       stage('Parsefile') {
       steps {
         sh "sed '#</servers>#,$d' settings.xml > temp"
@@ -65,4 +65,5 @@ pipeline {
       sh 'docker logout'
     }
   }*/
+}
 }
